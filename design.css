@@ -1,0 +1,38 @@
+#home {
+    visibility: visible;
+}
+#recipes {
+    visibility: hidden;
+}
+#add {
+    visibility: hidden;
+}
+
+h2 {
+    color: #ecebec;
+    background-color: #534458;
+    opacity: 0.8;
+    border-style: double;
+    padding: 15px;
+    
+}
+
+div {
+    text-align: center;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+p {
+    opacity: 0.7;
+}
+
+button {
+    background-color: #776081;
+    color: #f2eef3;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+button:hover {
+    background-color: #57507a;
+}

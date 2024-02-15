@@ -36,3 +36,8 @@ button {
 button:hover {
     background-color: #57507a;
 }
+
+li {
+    color: blue;
+    cursor: pointer;
+}

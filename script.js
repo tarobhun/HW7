@@ -1,75 +1,76 @@
 $(document).ready(function(){
     let recipes = [];
-    let recipeIdCounter = 0;
+    let recipeIdCounter = 1;
 
     $(".currentr").click(function() {
-        $("#home").css("visibility", "hidden");
-        $("#add").css("visibility", "hidden");
-        $("#recipes").css("visibility", "visible");
+        window.location.href = "recipes.html";
+        recipes = JSON.parse(localStorage.getItem("recipes"));
+        recipeIdCounter = JSON.parse(localStorage.getItem("counter"));
+        if (recipes.length > 0) {
+            // Clear existing content in the textbox
+            $("#recipeList").empty();
+            // Display each recipe
+            for(let i = 0; i < recipes.length; i++) {
+                let current = recipes[i];
+                $("#recipeList").append("<li class='recipeItem' data-id='" 
+                    + current.id 
+                    + "' data-name='" 
+                    + current.name 
+                    + "' data-author='" 
+                    + current.author 
+                    + "' data-date='" 
+                    + current.date 
+                    + "' data-cuisine='" 
+                    + current.cuisine 
+                    + "' data-meal='" 
+                    + current.meal 
+                    + "' data-recipe='" 
+                    + current.recipe 
+                    + "'>" 
+                    + current.name 
+                    + "</li>");
+                $("#recipeList").append("<hr>");
+            }
+            // Get the parent element (ul) of recipe items
+            const recipeList = document.getElementById("recipeList");
 
-        // Clear existing content in the textbox
-        $("#recipeList").empty();
 
-        // Display each recipe
-        for(let i = 0; i < recipes.length; i++) {
-            let current = recipes[i];
-            $("#recipeList").append("<li class='recipeItem' data-id='" 
-                + current.id 
-                + "' data-name='" 
-                + current.name 
-                + "' data-author='" 
-                + current.author 
-                + "' data-date='" 
-                + current.date 
-                + "' data-cuisine='" 
-                + current.cuisine 
-                + "' data-meal='" 
-                + current.meal 
-                + "' data-recipe='" 
-                + current.recipe 
-                + "'>" 
-                + current.name 
-                + "</li>");
-            $("#textbox").append("<hr>");
+            // Add click event listener to the parent element
+            recipeList.addEventListener("click", function(event) {
+                // Check if the clicked element is a recipe item (li)
+                if (event.target.classList.contains("recipeItem")) {
+                    // Get the recipe details from data attributes
+                    let id = event.target.dataset.id;
+                    let name = event.target.dataset.name;
+                    let author = event.target.dataset.author;
+                    let date = event.target.dataset.date;
+                    let cuisine = event.target.dataset.cuisine;
+                    let meal = event.target.dataset.meal;
+                    let recipe = event.target.dataset.recipe;
+
+                    // Construct the URL for the recipe details page with recipe details as parameters
+                    let url = "recipe-details.html?id=" + id 
+                            + "&name=" + encodeURIComponent(name) 
+                            + "&author=" + encodeURIComponent(author) 
+                            + "&date=" + encodeURIComponent(date) 
+                            + "&cuisine=" + encodeURIComponent(cuisine) 
+                            + "&meal=" + encodeURIComponent(meal) 
+                            + "&recipe=" + encodeURIComponent(recipe);
+
+                    // Navigate to the recipe details page
+                    window.location.href = url;
+                }
+            });
+        }
+        else {
+            alert("Oops! You haven't added any recipes yet! Please navigate to the add recipes page to get started.");
         }
     });
 
-    // Get the parent element (ul) of recipe items
-const recipeList = document.getElementById("recipeList");
-
-// Add click event listener to the parent element
-recipeList.addEventListener("click", function(event) {
-    // Check if the clicked element is a recipe item (li)
-    if (event.target.classList.contains("recipeItem")) {
-        // Get the recipe details from data attributes
-        let id = event.target.dataset.id;
-        let name = event.target.dataset.name;
-        let author = event.target.dataset.author;
-        let date = event.target.dataset.date;
-        let cuisine = event.target.dataset.cuisine;
-        let meal = event.target.dataset.meal;
-        let recipe = event.target.dataset.recipe;
-
-        // Construct the URL for the recipe details page with recipe details as parameters
-        let url = "recipe-details.html?id=" + id 
-                + "&name=" + encodeURIComponent(name) 
-                + "&author=" + encodeURIComponent(author) 
-                + "&date=" + encodeURIComponent(date) 
-                + "&cuisine=" + encodeURIComponent(cuisine) 
-                + "&meal=" + encodeURIComponent(meal) 
-                + "&recipe=" + encodeURIComponent(recipe);
-
-        // Navigate to the recipe details page
-        window.location.href = url;
-    }
-});
-
-
-
     $(".newr").click(function() {
-        $("#home").css("visibility", "hidden");
-        $("#add").css("visibility", "visible");
-        $("#recipes").css("visibility", "hidden");
+       window.location.href = "add.html";
+       recipes = JSON.parse(localStorage.getItem("recipes"));
+       recipeIdCounter = JSON.parse(localStorage.getItem("counter"));
     });
 
 
@@ -77,7 +78,7 @@ recipeList.addEventListener("click", function(event) {
     // Click event handler for "Add Recipe" button
     $("#buttonAdd").click(function(){
         let current = {
-            id: recipeIdCounter++,
+            id: recipeIdCounter,
             name: $("#name").val(),
             author: $("#author").val(),
             date: $("#date").val(),
@@ -86,6 +87,9 @@ recipeList.addEventListener("click", function(event) {
             recipe: $("#recipe").val()
         };
         recipes.push(current);
+        recipeIdCounter++;
+        localStorage.setItem("recipes", JSON.stringify(recipes));
+        localStorage.setItem("counter", JSON.stringify(recipeIdCounter));
 
         alert("Recipe added successfully. View the Recipes page.");
 
@@ -98,15 +102,13 @@ recipeList.addEventListener("click", function(event) {
         $("#recipe").val("");
 
         // Show the home section after adding the recipe
-        $("#home").css("visibility", "visible");
-        $("#add").css("visibility", "hidden");
-        $("#recipes").css("visibility", "hidden");
+        window.location.href = "index.html";
     });
 
     $(".mainpage").click(function() {
-        $("#home").css("visibility", "visible");
-        $("#add").css("visibility", "hidden");
-        $("#recipes").css("visibility", "hidden");
+        window.location.href = "index.html";
+        recipes = JSON.parse(localStorage.getItem("recipes"));
+        recipeIdCounter = JSON.parse(localStorage.getItem("counter"));
     });
 });
 

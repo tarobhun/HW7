@@ -1,13 +1,3 @@
-#home {
-    visibility: visible;
-}
-#recipes {
-    visibility: hidden;
-}
-#add {
-    visibility: hidden;
-}
-
 h2 {
     color: #ecebec;
     background-color: #534458;

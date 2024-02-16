@@ -31,3 +31,7 @@ li {
     color: blue;
     cursor: pointer;
 }
+
+table, th, td {
+    border:1px solid black;
+  }

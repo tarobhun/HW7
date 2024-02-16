@@ -6,6 +6,8 @@ $(document).ready(function(){
         window.location.href = "recipes.html";
         recipes = JSON.parse(localStorage.getItem("recipes"));
         recipeIdCounter = JSON.parse(localStorage.getItem("counter"));
+    });
+    if (window.location.href === "recipes.html") {
         if (recipes.length > 0) {
             // Clear existing content in the textbox
             $("#recipeList").empty();
@@ -65,7 +67,7 @@ $(document).ready(function(){
         else {
             alert("Oops! You haven't added any recipes yet! Please navigate to the add recipes page to get started.");
         }
-    });
+    }
 
     $(".newr").click(function() {
        window.location.href = "add.html";

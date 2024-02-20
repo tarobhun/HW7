@@ -7,7 +7,7 @@ $(document).ready(function(){
         recipes = JSON.parse(localStorage.getItem("recipes"));
         recipeIdCounter = JSON.parse(localStorage.getItem("counter"));
     });
-    if (window.location.href == "file:///C:/Users/micah/IntrotoC%23/HW7/recipes.html") {
+    if (window.location.href == "recipe.html") {
         recipes = JSON.parse(localStorage.getItem("recipes"));
         recipeIdCounter = JSON.parse(localStorage.getItem("counter"));
         if (recipes.length > 0) {

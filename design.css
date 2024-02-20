@@ -27,11 +27,42 @@ button:hover {
     background-color: #57507a;
 }
 
-li {
-    color: blue;
-    cursor: pointer;
-}
-
 table, th, td {
     border:1px solid black;
+    color: #3f3e3e;
+    text-align: center;
+    padding: 3px;
+  }
+
+  th {
+    background-color: #b9b9b9;
+  }
+
+  #recipeList, li {
+    text-align: left;
+    cursor: pointer;
+    color: black;
+    display: flex;
+    position: relative;
+    
+  }
+
+  
+  li::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #0087ca;
+    transform-origin: center;
+    transition: transform 0.25s ease-out;
+  }
+  
+  li:hover::after {
+    transform: scaleX(1);
+    transform-origin: center;
+    
   }

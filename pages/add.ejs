@@ -1,0 +1,86 @@
+<div data-role="header" data-theme="a">
+    <h2>Add New Recipe</h2>
+</div>
+<div data-role="navbar" data-theme="a">
+
+    <button type="button" class="mainpage">Home</button>
+    <br>
+    <br>
+    <button type="button" class="currentr">View Your Recipes</button>
+</div>
+<br>
+<br>
+
+
+<div data-role="content" data-theme="a">
+
+    <label for="name">Recipe Name</label> <br  />
+        <input type="text" title="Recipe Name" id="name" /><br  />
+        <br>
+    <label for="recipe">Write Recipe Here</label> <br  />
+        <input type="text" title="Write Recipe Here" id="recipe" /><br  />
+        <br>
+    <label for="author">Name of Recipe Author</label> <br  />
+        <input type="text" title="Write Author's Name Here" id="author" /><br  />
+        <br>
+    <label for="date">Write Date Here</label> <br  />
+        <input type="text" title="Write Date Here" id="date" /><br  />
+        <br>
+
+
+    <label for="select-cuisine">Select Cuisine Type</label>
+    <select name="cuisine" id="select-cuisine">
+        <option value="Mexican">Mexican</option>
+        <option value="American">American</option>
+        <option value="Italian">Italian</option>
+        <option value="French">French</option>
+        <option value="British">British</option>
+        <option value="Irish">Irish</option>
+        <option value="Chinese">Chinese</option>
+        <option value="Japanese">Japanese</option>
+        <option value="Korean">Korean</option>
+        <option value="German">German</option>
+    </select>
+    <label for="select-meal">Select Meal Type</label>
+    <select name="meal" id="select-meal">
+        <option value="Breakfast">Breakfast</option>
+        <option value="Lunch">Lunch</option>
+        <option value="Dinner">Dinner</option>
+        <option value="Dessert">Dessert</option>
+
+
+    </select>
+
+
+    <button id="buttonAdd">Add This Recipe</button>
+    <br>
+</div>
+
+<% $("#buttonAdd").click(function(){
+    let current = {
+        id: recipeIdCounter,
+        name: $("#name").val(),
+        author: $("#author").val(),
+        date: $("#date").val(),
+        cuisine: $("#select-cuisine").val(),
+        meal: $("#select-meal").val(),
+        recipe: $("#recipe").val()
+    };
+    recipes.push(current);
+    recipeIdCounter++;
+    localStorage.setItem("recipes", JSON.stringify(recipes));
+    localStorage.setItem("counter", JSON.stringify(recipeIdCounter));
+
+    alert("Recipe added successfully. View the Recipes page.");
+
+    // Reset form fields
+    $("#name").val("");
+    $("#author").val("");
+    $("#date").val("");
+    $("#select-cuisine").val("");
+    $("#select-meal").val("");
+    $("#recipe").val("");
+
+    // Show the home section after adding the recipe
+    $("#display").load("pages/home.ejs");
+}); %>

@@ -1,0 +1,75 @@
+<div data-role="header" data-theme="a">
+    <h2>Recipes</h2>
+        <div data-role="navbar" data-theme="a">
+    
+            <button type="button" class="mainpage">Home</button>
+            <br>
+            <br>
+            <button type="button" class="newr">Add New Recipe</button>
+        </div>
+    </div>
+    <br>
+    <br>
+
+    <ul id="recipeList"></ul>
+    <% if (recipes.length > 0) {%>
+        <% // Clear existing content in the textbox
+            $("#recipeList").empty();
+            // Display each recipe
+            for(let i = 0; i < recipes.length; i++) {
+                let current = recipes[i];
+                $("#recipeList").append("<li class='recipeItem' data-id='" 
+                    + current.id 
+                    + "' data-name='" 
+                    + current.name 
+                    + "' data-author='" 
+                    + current.author 
+                    + "' data-date='" 
+                    + current.date 
+                    + "' data-cuisine='" 
+                    + current.cuisine 
+                    + "' data-meal='" 
+                    + current.meal 
+                    + "' data-recipe='" 
+                    + current.recipe 
+                    + "'>" 
+                    + current.name 
+                    + "</li>");
+                $("#recipeList").append("<hr>");
+            } %>
+            <% // Get the parent element (ul) of recipe items
+            const recipeList = document.getElementById("recipeList");
+
+
+            // Add click event listener to the parent element
+            recipeList.addEventListener("click", function(event) {
+                // Check if the clicked element is a recipe item (li)
+                if (event.target.classList.contains("recipeItem")) {
+                    // Get the recipe details from data attributes
+                    let id = event.target.dataset.id;
+                    let name = event.target.dataset.name;
+                    let author = event.target.dataset.author;
+                    let date = event.target.dataset.date;
+                    let cuisine = event.target.dataset.cuisine;
+                    let meal = event.target.dataset.meal;
+                    let recipe = event.target.dataset.recipe;
+
+                    // Construct an item to use for loading the details page
+                    let details = {
+                        Id: id;
+                        Name: name;
+                        Author: author;
+                        Date: date;
+                        Cuisine: cuisine;
+                        Meal: meal;
+                        Recipe: recipe;
+                    }
+                    // Load the details page
+                    $("#display").load("pages/recipe-details.ejs");
+
+                }
+            }); %>
+    <% } %>
+    <% else {
+        alert("Oops! You haven't added any recipes yet! Please navigate to the add recipes page to get started.");
+    } %>

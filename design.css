@@ -67,12 +67,12 @@ table, th, td {
     
   }
 
-#recipes {
+/* #recipes {
     visibility: hidden;
 }
 #add {
     visibility: hidden;
 }
 #recipe-details {
-    visibility: hidden;
-}
+    visibility: visible;
+} */

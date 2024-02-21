@@ -4,74 +4,73 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Little CookBook</title>
-    <script src="jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 </head>
 <body>
-    <div id="display">
+        <!-- Home Page -->
         <div data-role="page" id="home">
             <div data-role="header" >
-                <h2>Let's Start Cooking!</h2> </div>
+                <h2>Let's Start Cooking!</h2>
                 <div data-role="navbar" data-theme="a">
-                    
-                    <button type="button" class="currentr">View Your Recipes</button>
-                    <br>
-                    <br>
-                    <button type="button" class="newr">Add New Recipe</button>
-                    <br>
-                    <br>
-                    </div>
-                    
-            
-            
-                <div data-role="content" data-theme="a"></div>
+                    <ul>
+                        <li><a href="#recipes">My Recipes</a></li>
+                        <li><a href="#add">Add Recipe</a></li>
+                    </ul>
+                </div>
+            </div>     
+            <div data-role="content" data-theme="a">
                 <img src="images/woodenUtensils.jpg" alt="picture of cooking utensil or kitchen appliance" width="250" height="300">
+            </div>
+            <div data-role="footer" data-theme="a">
+                <p>Heidi Hun and Mikaeyla Coldiron 2024</p>
+            </div>
         </div>
-
+        <!-- Recipes Page -->
         <div data-role="page" id="recipes">
             <div data-role="header" data-theme="a">
                 <h2>Recipes</h2>
                     <div data-role="navbar" data-theme="a">
-                
-                        <button type="button" class="mainpage">Home</button>
-                        <br>
-                        <br>
-                        <button type="button" class="newr">Add New Recipe</button>
+                        <ul>
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#add">Add Recipe</a></li>
+                        </ul>
+                        
                     </div>
-                </div>
-                <br>
-                <br>
-            
+            </div>
+            <div data-role="content" data-theme="a">
                 <ul id="recipeList"></ul>
+            </div>
+            <div data-role="footer" data-theme="a">
+                <p>Heidi Hun and Mikaeyla Coldiron 2024</p>
+            </div>
         </div>
-
+        <!-- Add New Recipe Page -->
         <div data-role="page" id="add">
             <div data-role="header" data-theme="a">
                 <h2>Add New Recipe</h2>
             </div>
             <div data-role="navbar" data-theme="a">
-            
-                <button type="button" class="mainpage">Home</button>
-                <br>
-                <br>
-                <button type="button" class="currentr">View Your Recipes</button>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#recipes">My Recipes</a></li>
+                </ul>   
             </div>
-            <br>
-            <br>
-            
             
             <div data-role="content" data-theme="a">
             
-                <label for="name">Recipe Name</label> <br  />
-                    <input type="text" title="Recipe Name" id="name" /><br  />
+                <label for="name">Recipe Name</label> <br>
+                    <input type="text" title="Recipe Name" id="name"><br>
                     <br>
                 <label for="recipe">Write Recipe Here</label> <br  />
-                    <input type="text" title="Write Recipe Here" id="recipe" /><br  />
+                    <input type="text" title="Write Recipe Here" id="recipe"><br>
                     <br>
-                <label for="author">Name of Recipe Author</label> <br  />
-                    <input type="text" title="Write Author's Name Here" id="author" /><br  />
+                <label for="author">Name of Recipe Author</label> <br>
+                    <input type="text" title="Write Author's Name Here" id="author"><br>
                     <br>
                 <label for="date">Write Date Here</label> <br  />
-                    <input type="text" title="Write Date Here" id="date" /><br  />
+                    <input type="text" title="Write Date Here" id="date"><br>
                     <br>
             
             
@@ -102,43 +101,43 @@
                 <button id="buttonAdd">Add This Recipe</button>
                 <br>
             </div>
+            <div data-role="footer" data-theme="a">
+                <p>Heidi Hun and Mikaeyla Coldiron 2024</p>
+            </div>
         </div>
+        <!-- Hidden Recipe Details Page -->
         <div data-role="page" id="recipe-details">
             <div data-role="navbar" data-theme="a">
-                        
-                <button type="button" class="mainpage">Return to the Home Page</button>
-                <br>
-                <br>
-                <button type="button" class="currentr">View Your Recipes</button>
-                <br>
-                <br>
-                <button type="button" class="newr">Add New Recipe</button>
-                <br>
-                <br>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#add">Add Recipe</a></li>
+                    <li><a href="#recipes">Back to My Recipes</a></li>
+                </ul>
             </div>
-            <table>
-                <tr>
-                    <th>Recipe Name</th>
-                    <th>Author</th>
-                    <th>Date Added</th>
-                    <th>Cuisine Type</th>
-                    <th>Meal</th>
-                    <th>Recipe</th>
-                </tr>
-                <tr>
-                    <td id="rname"></td>
-                    <td id="author"></td>
-                    <td id="date"></td>
-                    <td id="cuisine"></td>
-                    <td id="meal"></td>
-                    <td id="recipe"></td>
-                </tr>
-            </table>
+            <div data-role="content" data-theme="a">
+                <table>
+                    <tr>
+                        <th>Recipe Name</th>
+                        <th>Author</th>
+                        <th>Date Added</th>
+                        <th>Cuisine Type</th>
+                        <th>Meal</th>
+                        <th>Recipe</th>
+                    </tr>
+                    <tr>
+                        <td id="rname"></td>
+                        <td id="rauthor"></td>
+                        <td id="rdate"></td>
+                        <td id="rcuisine"></td>
+                        <td id="rmeal"></td>
+                        <td id="rrecipe"></td>
+                    </tr>
+                </table>
+            </div>
+            <div data-role="footer" data-theme="a">
+                <p>Heidi Hun and Mikaeyla Coldiron 2024</p>
+            </div>
         </div>
-    </div>
-    <div data-role="footer" data-theme="a">
-        <p>Heidi Hun and Mikaeyla Coldiron 2024</p>
-    </div>
 
 
     <script src="script.js" defer></script>

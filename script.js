@@ -1,65 +1,30 @@
 $(document).ready(function(){
     let recipes = [];
-    let recipeIdCounter = 1;
 
-    $(".currentr").click(function() {
-        $("#home").css("visibility", "hidden");
-        $("#add").css("visibility", "hidden");
-        $("#recipe-details").css("visibility", "hidden");
-        $("#recipes").css("visibility", "visible");
-        displayRecipes(); // Display recipes when the #recipes element becomes visible
-    });
+    let RecipeObject = function (pName, pAuthor, pDate, pCuisine, pMeal, pRecipe) {
+        this.id = recipes.length + 1;
+        this.name = pName;
+        this.author = pAuthor;
+        this.date = pDate;  
+        this.cuisine = pCuisine;
+        this.meal = pMeal;
+        this.recipe = pRecipe;
+    }
     
-    $(".newr").click(function() {
-        $("#home").css("visibility", "hidden");
-        $("#recipes").css("visibility", "hidden");
-        $("#recipe-details").css("visibility", "hidden");
-        $("#add").css("visibility", "visible");
-    });
-
-    $(".mainpage").click(function() {
-        $("#recipes").css("visibility", "hidden");
-        $("#add").css("visibility", "hidden");
-        $("#recipe-details").css("visibility", "hidden");
-        $("#home").css("visibility", "visible");
-    });
 
     $("#buttonAdd").click(function(){
-        let current = {
-            id: recipeIdCounter,
-            name: $("#name").val(),
-            author: $("#author").val(),
-            date: $("#date").val(),
-            cuisine: $("#select-cuisine").val(),
-            meal: $("#select-meal").val(),
-            recipe: $("#recipe").val()
-        };
+        let current = new RecipeObject(
+            $("#name").val(),
+            $("#author").val(),
+            $("#date").val(),
+            $("#select-cuisine").val(),
+            $("#select-meal").val(),
+            $("#recipe").val()
+        );
         recipes.push(current);
-        recipeIdCounter++;
-        localStorage.setItem("recipes", JSON.stringify(recipes));
-        localStorage.setItem("counter", JSON.stringify(recipeIdCounter));
 
-        // Display the new recipe in the recipe list
-        // $("#recipeList").append("<li class='recipeItem' data-id='" 
-        //     + current.id 
-        //     + "' data-name='" 
-        //     + current.name 
-        //     + "' data-author='" 
-        //     + current.author 
-        //     + "' data-date='" 
-        //     + current.date 
-        //     + "' data-cuisine='" 
-        //     + current.cuisine 
-        //     + "' data-meal='" 
-        //     + current.meal 
-        //     + "' data-recipe='" 
-        //     + current.recipe
-        //     + "'>" 
-        //     + current.name 
-        //     + "</li>");
-        // $("#recipeList").append("<hr>");
 
-        alert("Recipe added successfully. View the Recipes page.");
+        alert("Recipe added successfully. Go to the My Recipes page to see it!");
 
         // Reset form fields
         $("#name").val("");
@@ -69,11 +34,6 @@ $(document).ready(function(){
         $("#select-meal").val("");
         $("#recipe").val("");
 
-        // Show the home section after adding the recipe
-        $("#recipe-details").css("visibility", "hidden");
-        $("#add").css("visibility", "hidden");
-        $("#recipes").css("visibility", "hidden");
-        $("#home").css("visibility", "visible");
     });  
 
     // Function to display recipes
@@ -86,18 +46,6 @@ $(document).ready(function(){
                 let current = recipes[i];
                 $("#recipeList").append("<li class='recipeItem' data-id='" 
                     + current.id 
-                    + "' data-name='" 
-                    + current.name 
-                    + "' data-author='" 
-                    + current.author 
-                    + "' data-date='" 
-                    + current.date 
-                    + "' data-cuisine='" 
-                    + current.cuisine 
-                    + "' data-meal='" 
-                    + current.meal 
-                    + "' data-recipe='" 
-                    + current.recipe 
                     + "'>" 
                     + current.name 
                     + "</li>");
@@ -108,8 +56,11 @@ $(document).ready(function(){
         }
     }
 
-    // Call the displayRecipes function when the page loads initially
-    displayRecipes();
+    $(document).on("pageshow","#recipes",function(){
+
+        displayRecipes();
+     
+     });
 
     // Get the parent element (ul) of recipe items
     const recipeList = document.getElementById("recipeList");
@@ -120,42 +71,15 @@ $(document).ready(function(){
         if (event.target.classList.contains("recipeItem")) {
             // Get the recipe details from data attributes
             let id = event.target.dataset.id;
-            let name = event.target.dataset.name;
-            let author = event.target.dataset.author;
-            let date = event.target.dataset.date;
-            let cuisine = event.target.dataset.cuisine;
-            let meal = event.target.dataset.meal;
-            let recipe = event.target.dataset.recipe;
-
-            console.log("ID:", id);
-            console.log("Name:", name);
-            console.log("Author:", author);
-            console.log("Date:", date);
-            console.log("Cuisine:", cuisine);
-            console.log("Meal:", meal);
-            console.log("Recipe:", recipe);
-
-            // Construct an item to use for loading the details page
-            let details = {
-                Id: id,
-                Name: name,
-                Author: author,
-                Date: date,
-                Cuisine: cuisine,
-                Meal: meal,
-                Recipe: recipe
-            }
+            let current = recipes[id - 1];
             // Load the details page
-            $("#home").css("visibility", "hidden");
-            $("#add").css("visibility", "hidden");
-            $("#recipes").css("visibility", "hidden");
-            $("#recipe-details").css("visibility", "visible");
-            $("#rname").text(details.Name);
-            $("#author").text(details.Author);
-            $("#date").text(details.Date);
-            $("#cuisine").text(details.Cuisine);
-            $("#meal").text(details.Meal);
-            $("#recipe").text(details.Recipe);
+            $.mobile.changePage("#recipe-details");
+            $("#rname").text(current.name);
+            $("#rauthor").text(current.author);
+            $("#rdate").text(current.date);
+            $("#rcuisine").text(current.cuisine);
+            $("#rmeal").text(current.meal);
+            $("#rrecipe").text(current.recipe);
         }
     });
 });

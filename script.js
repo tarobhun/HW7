@@ -48,8 +48,9 @@ $(document).ready(function(){
                     + current.id 
                     + "'>" 
                     + current.name 
-                    + "</li>");
-                $("#recipeList").append("<hr>");
+                    + "</li>"
+                    + "<hr>");
+                //$("#recipeList").append("<hr>");
             }
         } else {
             alert("Please add a recipe");
@@ -60,7 +61,7 @@ $(document).ready(function(){
 
         displayRecipes();
      
-     });
+    });
 
     // Get the parent element (ul) of recipe items
     const recipeList = document.getElementById("recipeList");

@@ -1,68 +1,68 @@
 h2 {
-    color: #ecebec;
-    background-color: #534458;
-    opacity: 0.8;
-    border-style: double;
-    padding: 15px;
+  color: #ecebec;
+  background-color: #534458;
+  opacity: 0.8;
+  border-style: double;
+  padding: 15px;
     
 }
 
 div {
-    text-align: center;
-    font-family: "Lucida Console", "Courier New", monospace;
+  text-align: center;
+  font-family: "Lucida Console", "Courier New", monospace;
 }
 
 p {
-    opacity: 0.7;
+  opacity: 0.7;
 }
 
 button {
-    background-color: #776081;
-    color: #f2eef3;
-    border-radius: 10px;
-    padding: 5px;
+  background-color: #776081;
+  color: #f2eef3;
+  border-radius: 10px;
+  padding: 5px;
 }
 
 button:hover {
-    background-color: #57507a;
+  background-color: #57507a;
 }
 
 table, th, td {
-    border:1px solid black;
-    color: #3f3e3e;
-    text-align: center;
-    padding: 3px;
-  }
+  border:1px solid black;
+  color: #3f3e3e;
+  text-align: center;
+  padding: 3px;
+}
 
-  th {
-    background-color: #b9b9b9;
-  }
+th {
+  background-color: #b9b9b9;
+}
 
-  #recipeList, li {
-    text-align: left;
-    cursor: pointer;
-    color: black;
-    display: flex;
-    position: relative;
-    
-  }
+#recipeList, li {
+  text-align: center;
+  cursor: pointer;
+  color: black;
+  display: block;
+  position: relative;
+   
+}
 
   
-  li::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    transform: scaleX(0);
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: #0087ca;
-    transform-origin: center;
-    transition: transform 0.25s ease-out;
-  }
+li::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #0087ca;
+  transform-origin: center;
+  transition: transform 0.25s ease-out;
+}
   
-  li:hover::after {
-    transform: scaleX(1);
-    transform-origin: center;
-    
-  }
+li:hover::after {
+  transform: scaleX(1);
+  transform-origin: center;
+   
+}

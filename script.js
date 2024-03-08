@@ -2,7 +2,7 @@ $(document).ready(function(){
     let recipes = [];
 
     let RecipeObject = function (pName, pAuthor, pDate, pCuisine, pMeal, pRecipe) {
-        this.id = recipes.length + 1;
+        this.id =  Math.random().toString(16).slice(5);
         this.name = pName;
         this.author = pAuthor;
         this.date = pDate;  

@@ -1,5 +1,4 @@
 $(document).ready(function(){
-    let recipes = [];
 
     let RecipeObject = function (pName, pAuthor, pDate, pCuisine, pMeal, pRecipe) {
         this.id =  Math.random().toString(16).slice(5);
@@ -21,10 +20,18 @@ $(document).ready(function(){
             $("#select-meal").val(),
             $("#recipe").val()
         );
-        recipes.push(current);
-
-
-        alert("Recipe added successfully. Go to the My Recipes page to see it!");
+        $.ajax({
+            type: "POST",
+            url: "/addRecipe",
+            data: JSON.stringify(current),
+            dataType: "json",
+            success: function() {
+                alert("Recipe added successfully. Go to the My Recipes page to see it!");
+            },
+            error: function() {
+                alert("ERROR: Recipe addition failed. Please try again.")
+            }
+        });
 
         // Reset form fields
         $("#name").val("");
@@ -38,6 +45,14 @@ $(document).ready(function(){
 
     // Function to display recipes
     function displayRecipes() {
+        const recipes = $.ajax({
+            type: "GET",
+            url: "/getRecipes",
+            dataType: "json",
+            error: function() {
+                alert("Internal error, please refresh the page and try again.")
+            }
+        });
         if (recipes.length > 0) {
             // Clear existing content in the textbox
             $("#recipeList").empty();

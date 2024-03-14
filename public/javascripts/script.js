@@ -23,13 +23,13 @@ $(document).ready(function(){
         $.ajax({
             type: "POST",
             url: "/addRecipe",
-            data: JSON.stringify(current),
+            data: current,
             dataType: "json",
             success: function() {
                 alert("Recipe added successfully. Go to the My Recipes page to see it!");
             },
             error: function() {
-                alert("ERROR: Recipe addition failed. Please try again.")
+                alert("ERROR: Recipe addition failed. Please try again.");
             }
         });
 
@@ -45,34 +45,34 @@ $(document).ready(function(){
 
     // Function to display recipes
     function displayRecipes() {
-        const recipes = $.ajax({
+        let recipes = $.ajax({
             type: "GET",
             url: "/getRecipes",
             dataType: "json",
+            success: function() {
+                alert("Get call successful");
+            },
             error: function() {
-                alert("Internal error, please refresh the page and try again.")
+                alert("Please add a recipe");
             }
         });
-        if (recipes.length > 0) {
-            // Clear existing content in the textbox
-            $("#recipeList").empty();
-            // Display each recipe
-            for(let i = 0; i < recipes.length; i++) {
-                let current = recipes[i];
-                $("#recipeList").append("<li class='recipeItem' data-id='" 
-                    + current.id 
-                    + "'>" 
-                    + current.name 
-                    + "</li>"
-                    + "<hr>");
-                //$("#recipeList").append("<hr>");
-            }
-        } else {
-            alert("Please add a recipe");
+        alert(recipes[0].name);
+        // Clear existing content in the textbox
+        $("#recipeList").empty();
+        // Display each recipe
+        for(let i = 0; i < recipes.length; i++) {
+            let current = recipes[i];
+            $("#recipeList").append("<li class='recipeItem' data-id='" 
+                + current.id 
+                + "'>" 
+                + current.name 
+                + "</li>"
+                + "<hr>");
+            //$("#recipeList").append("<hr>");
         }
     }
 
-    $(document).on("pageshow","#recipes",function(){
+    $(document).on("pageshow","#recipes",function(){8000
 
         displayRecipes();
      

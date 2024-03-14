@@ -46,6 +46,9 @@ router.post("/addRecipe", function(req, res) {
   }
 });
 
+
+module.exports = router;
+
 //router.delete('/RemoveRecipe/:ID', (req, res) => {
   //const num = req.params.ID;
   //let isFound = false;
@@ -60,7 +63,6 @@ router.post("/addRecipe", function(req, res) {
     //res.send('The recipe saved at ID ' + num + ' has been deleted!');
   //}
 //});
-module.exports = router;
 
 //function GetIndex(num) {
   //for (let i = 0; i < serverArray.length; i++) {

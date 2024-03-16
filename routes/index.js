@@ -26,7 +26,7 @@ return true;
 }
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
   res.sendFile('index.html');
 });
 

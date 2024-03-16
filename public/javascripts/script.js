@@ -1,14 +1,13 @@
+let RecipeObject = function (pName, pAuthor, pDate, pCuisine, pMeal, pRecipe) {
+    this.id =  Math.random().toString(16).slice(5);
+    this.name = pName;
+    this.author = pAuthor;
+    this.date = pDate;  
+    this.cuisine = pCuisine;
+    this.meal = pMeal;
+    this.recipe = pRecipe;
+}
 $(document).ready(function(){
-
-    let RecipeObject = function (pName, pAuthor, pDate, pCuisine, pMeal, pRecipe) {
-        this.id =  Math.random().toString(16).slice(5);
-        this.name = pName;
-        this.author = pAuthor;
-        this.date = pDate;  
-        this.cuisine = pCuisine;
-        this.meal = pMeal;
-        this.recipe = pRecipe;
-    }
     
 
     $("#buttonAdd").click(function(){

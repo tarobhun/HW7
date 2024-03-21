@@ -1,14 +1,16 @@
-let RecipeObject = function (pName, pAuthor, pDate, pCuisine, pMeal, pRecipe) {
-    this.id =  Math.random().toString(16).slice(5);
+// Define RecipeObject constructor function
+let RecipeObject = function(pName, pAuthor, pDate, pCuisine, pMeal, pRecipe) {
+    this.id = Math.random().toString(16).slice(5);
     this.name = pName;
     this.author = pAuthor;
-    this.date = pDate;  
+    this.date = pDate;
     this.cuisine = pCuisine;
     this.meal = pMeal;
     this.recipe = pRecipe;
-}
+};
+
 $(document).ready(function(){
-    
+    let recipes; // Variable to store fetched recipes
 
     $("#buttonAdd").click(function(){
         let current = new RecipeObject(
@@ -22,10 +24,13 @@ $(document).ready(function(){
         $.ajax({
             type: "POST",
             url: "/addRecipe",
-            data: current,
+            data: JSON.stringify(current),
+            contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function() {
                 alert("Recipe added successfully. Go to the My Recipes page to see it!");
+                // After successfully adding, refresh the displayed recipes
+                displayRecipes();
             },
             error: function() {
                 alert("ERROR: Recipe addition failed. Please try again.");
@@ -39,42 +44,36 @@ $(document).ready(function(){
         $("#select-cuisine").val("");
         $("#select-meal").val("");
         $("#recipe").val("");
-
-    });  
+    });
 
     // Function to display recipes
     function displayRecipes() {
-        let recipes = $.ajax({
+        $.ajax({
             type: "GET",
             url: "/getRecipes",
             dataType: "json",
-            success: function() {
-                alert("Get call successful");
+            success: function(data) {
+                recipes = data; // Store fetched recipes in the variable
+                // Clear existing content in the textbox
+                $("#recipeList").empty();
+                // Display each recipe
+                recipes.forEach(function(current) {
+                    $("#recipeList").append("<li class='recipeItem' data-id='" 
+                        + current.id 
+                        + "'>" 
+                        + current.name 
+                        + "</li>"
+                        + "<hr>");
+                });
             },
             error: function() {
                 alert("Please add a recipe");
             }
         });
-        alert(recipes[0].name);
-        // Clear existing content in the textbox
-        $("#recipeList").empty();
-        // Display each recipe
-        for(let i = 0; i < recipes.length; i++) {
-            let current = recipes[i];
-            $("#recipeList").append("<li class='recipeItem' data-id='" 
-                + current.id 
-                + "'>" 
-                + current.name 
-                + "</li>"
-                + "<hr>");
-            //$("#recipeList").append("<hr>");
-        }
     }
 
-    $(document).on("pageshow","#recipes",function(){8000
-
+    $(document).on("pageshow","#recipes",function(){
         displayRecipes();
-     
     });
 
     // Get the parent element (ul) of recipe items
@@ -86,15 +85,18 @@ $(document).ready(function(){
         if (event.target.classList.contains("recipeItem")) {
             // Get the recipe details from data attributes
             let id = event.target.dataset.id;
-            let current = recipes[id - 1];
-            // Load the details page
-            $.mobile.changePage("#recipe-details");
-            $("#rname").text(current.name);
-            $("#rauthor").text(current.author);
-            $("#rdate").text(current.date);
-            $("#rcuisine").text(current.cuisine);
-            $("#rmeal").text(current.meal);
-            $("#rrecipe").text(current.recipe);
+            // Find the clicked recipe in the stored recipes array
+            let current = recipes.find(recipe => recipe.id === id);
+            if (current) {
+                // Load the details page
+                $.mobile.changePage("#recipe-details");
+                $("#rname").text(current.name);
+                $("#rauthor").text(current.author);
+                $("#rdate").text(current.date);
+                $("#rcuisine").text(current.cuisine);
+                $("#rmeal").text(current.meal);
+                $("#rrecipe").text(current.recipe);
+            }
         }
     });
 });
